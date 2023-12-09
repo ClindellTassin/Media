@@ -4,13 +4,29 @@ import { observer } from "mobx-react-lite";
 import { Outlet, useLocation } from "react-router-dom";
 import HomePage from "../../features/home/HomePage";
 import { ToastContainer } from "react-toastify";
+import { useStore } from "../stores/store";
+import { useEffect } from "react";
+import LoadingComponent from "./LoadingComponent";
+import ModalContainer from "../common/modals/ModalContainer";
 
 const App = () => {
+  const { commonStore, userStore } = useStore();
   const location = useLocation();
+
+  useEffect(() => {
+    if (commonStore.token) {
+      userStore.getUser().finally(() => commonStore.setAppLoaded());
+    } else {
+      commonStore.setAppLoaded();
+    }
+  }, [commonStore, userStore]);
+
+  if (!commonStore.appLoaded) return <LoadingComponent content="loading app..." />
 
   return (
     <>
-    <ToastContainer position='top-center' theme='dark' />
+      <ModalContainer />
+      <ToastContainer position='top-center' theme='dark' />
       {location.pathname === '/' ? <HomePage /> : (
         <>
           <Navbar />
