@@ -15,6 +15,7 @@ export default class UserStore {
         return !!this.user;
     }
 
+
     login = async (creds: UserFormValues) => {
         const user = await agent.Account.login(creds);
         store.commonStore.setToken(user.token);
@@ -44,5 +45,9 @@ export default class UserStore {
         } catch (error) {
             console.log(error);
         }
+    };
+
+    setImage = (image: string) => {
+        if (this.user) this.user.image = image;
     };
 }
