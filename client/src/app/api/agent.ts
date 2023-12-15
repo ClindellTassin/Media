@@ -87,6 +87,8 @@ const Profiles = {
     get: (username: string) => requests.get<Profile>(`profiles/${username}`),
     setMainPhoto: (id: string) => requests.post(`photos/${id}/setMain`, {}),
     deletePhoto: (id: string) => requests.delete(`photos/${id}`),
+    updateFollowing: (username: string) => requests.post(`follow/${username}`, {}),
+    listFollowings: (username: string, predicate: string) => requests.get<Profile[]>(`follow/${username}?predicate=${predicate}`),
     uploadPhoto: (file: Blob) => {
         const formData = new FormData();
         formData.append('File', file);

@@ -9,6 +9,11 @@ interface Props {
 }
 
 const ActivityListItemAttendee = ({ attendees }: Props) => {
+    const styles = {
+        borderColor: 'orange',
+        borderWidth: 2
+    };
+
     return (
         <List horizontal>
             {attendees.map(attendee => (
@@ -16,7 +21,7 @@ const ActivityListItemAttendee = ({ attendees }: Props) => {
                     key={attendee.username}
                     hoverable trigger={
                         <List.Item as={Link} to={`/profiles/${attendee.username}`}>
-                            <Image size='mini' circular src={attendee.image || '/assets/user.png'} />
+                            <Image size='mini' circular src={attendee.image || '/assets/user.png'} bordered style={attendee.following ? styles : null} />
                         </List.Item>
                     }
                 >
