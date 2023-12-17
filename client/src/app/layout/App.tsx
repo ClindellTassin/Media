@@ -1,7 +1,7 @@
 import { Container } from "semantic-ui-react";
 import Navbar from "./Navbar";
 import { observer } from "mobx-react-lite";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, ScrollRestoration, useLocation } from "react-router-dom";
 import HomePage from "../../features/home/HomePage";
 import { ToastContainer } from "react-toastify";
 import { useStore } from "../stores/store";
@@ -25,6 +25,7 @@ const App = () => {
 
   return (
     <>
+      <ScrollRestoration />
       <ModalContainer />
       <ToastContainer position='top-center' theme='dark' />
       {location.pathname === '/' ? <HomePage /> : (

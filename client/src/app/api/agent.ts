@@ -91,6 +91,7 @@ const Account = {
 
 const Profiles = {
     get: (username: string) => requests.get<Profile>(`profiles/${username}`),
+    updateProfile: (profile: Partial<Profile>) => requests.put(`profiles`, profile),
     setMainPhoto: (id: string) => requests.post(`photos/${id}/setMain`, {}),
     deletePhoto: (id: string) => requests.delete(`photos/${id}`),
     updateFollowing: (username: string) => requests.post(`follow/${username}`, {}),
